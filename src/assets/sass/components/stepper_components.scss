@@ -1,0 +1,47 @@
+body {
+    background-color: #75CC65;
+    margin: 0rem;
+}
+
+.container {
+    margin: 1rem 2rem;
+    background-color: #fff;
+    border: 1px solid black;
+    padding: 2rem;
+    border-radius: 2rem;
+    height: 85vh;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+select {
+    height: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stepper-pane {
+    height: 35vh;
+    margin-bottom: 0.5rem;
+
+    img {
+        width: 15rem;
+        height: 15rem;
+    }
+}
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border: 1px solid;
+    cursor: pointer;
+}
