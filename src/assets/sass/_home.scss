@@ -1,0 +1,70 @@
+.labels {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+
+    .container {
+        padding: 1rem;
+        width: 50%;
+
+        form {
+            border: 1px solid black;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .select-container,
+            .submit-container {
+                margin: 0.5rem;
+            }
+
+            .select-container {
+                select {
+                    margin-right: 0.5rem;
+
+                    :last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+
+        .query {
+            border: 1px solid black;
+
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: center;
+
+            p {
+                background-color: gray;
+                margin-right: 0.5rem;
+                padding: 0.5rem;
+                border-radius: 0.5rem;
+            }
+        }
+
+        .result {
+            border: 1px solid black;
+
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+
+            .link {
+                display: flex;
+
+                p {
+                    margin: 0 0.5rem;
+                }
+
+                a {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
