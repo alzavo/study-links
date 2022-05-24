@@ -1,14 +1,18 @@
-
 <template>
-    <StepperComponent />
+    <div class="container">
+        <LogoComponent />
+        <SelectComponent />
+    </div>
 </template>
 
 <script lang="ts">
-import StepperComponent from "@/components/home/StepperComponent.vue";
+import SelectComponent from "@/components/home/SelectComponent.vue";
+import LogoComponent from "@/components/home/LogoComponent.vue";
 
 export default {
     components: {
-        StepperComponent,
+        SelectComponent,
+        LogoComponent,
     },
 };
 </script>
