@@ -14,7 +14,6 @@
 </template>
 
 <script lang="ts">
-import linksJson from "@/links/links.json";
 import { Link } from "@/links/Link";
 import { getFilteredLinks } from "@/links/OperationsWithLinks";
 export default {
@@ -28,7 +27,8 @@ export default {
 
     created() {
         // @ts-ignore
-        if (this.$route.params.keyWords === undefined) {
+        const failToLoadKeywords = this.$route.params.keyWords === undefined;
+        if (failToLoadKeywords) {
             // @ts-ignore
             this.$router.push({ name: "home" });
         } else {
