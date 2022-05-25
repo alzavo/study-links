@@ -1,9 +1,0 @@
-1. after extracting grades
-    convert them to numbers
-    sort them in ascending order
-    convert back to strings
-
-???? ask mother !!!!!
-2. extract months instead of hard coding 
-    display only months which in use
-    proper order of months (september, october)

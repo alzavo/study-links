@@ -7,12 +7,6 @@ const routes: Array<RouteRecordRaw> = [
         name: 'home',
         component: HomeView
     },
-    {
-        path: '/links',
-        name: 'links',
-        props: { keyWords: [] as string[] },
-        component: () => import('../views/SearchResultView.vue')
-    }
 ];
 
 const router = createRouter({

@@ -1,4 +1,4 @@
-export interface Link {
+export interface Record {
     grade: string;
     subject: string;
     month: string;
