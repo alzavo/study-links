@@ -1,1 +1,10 @@
-@import "./components/stepper_components.scss";
+@import "./base";
+
+@import "./views/result";
+@import "./views/home";
+
+@import "./components/message";
+@import "./components/record";
+@import "./components/select";
+@import "./components/logo";
+@import "./components/controls";

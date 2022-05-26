@@ -1,7 +1,15 @@
 <template>
     <div class="container">
-        <div v-for="record in getFilteredRecords()" :key="record">
-            {{ record.topic }}
+        <MessageComponent
+            v-if="getFilteredRecords().length === 0"
+            text="Ei leitud midagi!"
+        />
+        <div v-if="getFilteredRecords().length !== 0" class="record-list">
+            <RecordRowComponent
+                v-for="record in getFilteredRecords()"
+                :key="record"
+                :record="record"
+            />
         </div>
         <ControlsComponent
             title="TAGASI"
@@ -12,7 +20,9 @@
 </template>
 
 <script lang="ts">
-import ControlsComponent from "@/components/home/ControlsComponent.vue";
+import ControlsComponent from "@/components/ControlsComponent.vue";
+import MessageComponent from "@/components/MessageComponent.vue";
+import RecordRowComponent from "@/components/RecordRowComponent.vue";
 import { Record } from "@/records/record";
 import { ALL_RECORDS } from "@/records/allRecords";
 import { KeyWord } from "@/records/constants/keyWords";
@@ -21,6 +31,8 @@ import router from "@/router";
 export default {
     components: {
         ControlsComponent,
+        MessageComponent,
+        RecordRowComponent,
     },
 
     data() {
@@ -48,6 +60,11 @@ export default {
 
     methods: {
         getFilteredRecords() {
+            // @ts-ignore
+            if (this.chosenKeyWords.length === 0) {
+                return [];
+            }
+
             return ALL_RECORDS.filter((record: Record) => {
                 // @ts-ignore
                 for (const word of this.chosenKeyWords) {

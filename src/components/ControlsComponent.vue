@@ -1,6 +1,6 @@
 <template>
     <div class="controls">
-        <button class="btn" @click.prevent="$emit(functionName)">
+        <button class="button" @click.prevent="$emit(functionName)">
             {{ title }}
         </button>
     </div>

@@ -1,0 +1,9 @@
+.record-list {
+    padding: 0.5rem;
+    min-height: 80vh;
+    max-height: 80vh;
+    overflow-y: scroll;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}

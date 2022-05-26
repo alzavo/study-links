@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <LogoComponent />
-        <form>
+        <form class="form">
             <SelectComponent enumName="KLASS" :enumKeys="grades" />
             <SelectComponent enumName="ÕPPEAINE" :enumKeys="subjects" />
             <SelectComponent enumName="KUU" :enumKeys="months" />
@@ -15,9 +15,9 @@
 </template>
 
 <script lang="ts">
-import LogoComponent from "@/components/home/LogoComponent.vue";
-import SelectComponent from "@/components/home/SelectComponent.vue";
-import ControlsComponent from "@/components/home/ControlsComponent.vue";
+import LogoComponent from "@/components/LogoComponent.vue";
+import SelectComponent from "@/components/SelectComponent.vue";
+import ControlsComponent from "@/components/ControlsComponent.vue";
 import { Grade } from "@/records/constants/grades";
 import { Subject } from "@/records/constants/subjects";
 import { Month } from "@/records/constants/months";

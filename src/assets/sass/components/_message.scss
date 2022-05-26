@@ -1,0 +1,23 @@
+.message {
+    margin: 35vh auto 0.5rem auto;
+    border: 1px solid black;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: rgb(199, 190, 190);
+    font-size: 1.5rem;
+}
+
+.message {
+    @include mediaQuery(768px) {
+        font-size: 1.5rem;
+        width: 70%;
+    }
+
+    @include mediaQuery(1024px) {
+        font-size: 2.5rem;
+        width: 50%;
+    }
+}
