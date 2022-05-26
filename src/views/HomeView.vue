@@ -2,19 +2,14 @@
     <div class="container">
         <LogoComponent />
         <form>
-            <SelectComponent
-                enumName="KLASS"
-                :enumKeys="this.$data.gradeEnumValues"
+            <SelectComponent enumName="KLASS" :enumKeys="grades" />
+            <SelectComponent enumName="ÕPPEAINE" :enumKeys="subjects" />
+            <SelectComponent enumName="KUU" :enumKeys="months" />
+            <ControlsComponent
+                title="OTSI"
+                functionName="goToResultPage"
+                @goToResultPage="goToResultPage()"
             />
-            <SelectComponent
-                enumName="ÕPPEAINE"
-                :enumKeys="this.$data.subjectEnumValues"
-            />
-            <SelectComponent
-                enumName="KUU"
-                :enumKeys="this.$data.monthEnumValues"
-            />
-            <ControlsComponent title="OTSI" />
         </form>
     </div>
 </template>
@@ -26,6 +21,7 @@ import ControlsComponent from "@/components/home/ControlsComponent.vue";
 import { Grade } from "@/records/constants/grades";
 import { Subject } from "@/records/constants/subjects";
 import { Month } from "@/records/constants/months";
+import { KeyWord } from "@/records/constants/keyWords";
 
 export default {
     components: {
@@ -36,19 +32,19 @@ export default {
 
     data() {
         return {
-            gradeEnumValues: [] as string[],
-            subjectEnumValues: [] as string[],
-            monthEnumValues: [] as string[],
+            grades: [] as string[],
+            subjects: [] as string[],
+            months: [] as string[],
         };
     },
 
     created() {
         // @ts-ignore
-        this.extractValuesFromEnum(Grade, this.gradeEnumValues);
+        this.extractValuesFromEnum(Grade, this.grades);
         // @ts-ignore
-        this.extractValuesFromEnum(Subject, this.subjectEnumValues);
+        this.extractValuesFromEnum(Subject, this.subjects);
         // @ts-ignore
-        this.extractValuesFromEnum(Month, this.monthEnumValues);
+        this.extractValuesFromEnum(Month, this.months);
     },
 
     methods: {
@@ -56,6 +52,28 @@ export default {
             for (const item of Object.values(valuesHolder)) {
                 targetCollection.push(item as string);
             }
+        },
+
+        goToResultPage(): void {
+            // @ts-ignore
+            this.$router.push({
+                // @ts-ignore
+                name: "result",
+                params: { recordsKeyWords: this.getRecordsKeyWords() },
+            });
+        },
+
+        getRecordsKeyWords(): string[] {
+            let keyWords: string[] = [];
+            for (const id of Object.values(KeyWord)) {
+                const htmlSelectElement = document.getElementById(id);
+                const keyWord =
+                    // @ts-ignore
+                    htmlSelectElement.options[htmlSelectElement.selectedIndex]
+                        .text;
+                keyWords.push(keyWord);
+            }
+            return keyWords;
         },
     },
 };

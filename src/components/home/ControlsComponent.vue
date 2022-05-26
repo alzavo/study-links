@@ -1,6 +1,8 @@
 <template>
     <div class="controls">
-        <button class="btn" @click.prevent="handleClick()">{{ title }}</button>
+        <button class="btn" @click.prevent="$emit(functionName)">
+            {{ title }}
+        </button>
     </div>
 </template>
 
@@ -8,12 +10,7 @@
 export default {
     props: {
         title: String,
-    },
-
-    methods: {
-        handleClick() {
-            console.log("contionue");
-        },
+        functionName: String,
     },
 };
 </script>

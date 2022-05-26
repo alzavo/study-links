@@ -3,7 +3,7 @@ import { Month } from "./constants/months";
 import { Subject } from "./constants/subjects";
 import { Record } from "./record";
 
-export const LINKS: Record[] = [
+export const ALL_RECORDS: Record[] = [
     {
         grade: Grade.First,
         subject: Subject.Art,
