@@ -1,5 +1,5 @@
 <template>
-    <button class="record" @click="openLink()">
+    <button class="record" @click.prevent="openLink(record.link)">
         {{ record.topic }}
     </button>
 </template>
@@ -10,10 +10,9 @@ export default {
     },
 
     methods: {
-        openLink() {
-            // @ts-ignore
-            window.open(this.record.link);
-        },
-    },
+        openLink(link: string) {
+            window.open(link);
+        }
+    }
 };
 </script>

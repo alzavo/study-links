@@ -1,87 +1,32 @@
 <template>
     <div class="container">
-        <MessageComponent
-            v-if="getFilteredRecords().length === 0"
-            text="Ei leitud midagi!"
-        />
-        <div v-if="getFilteredRecords().length !== 0" class="record-list">
-            <RecordRowComponent
-                v-for="record in getFilteredRecords()"
-                :key="record"
-                :record="record"
-            />
+        <MessageComponent text="Ei leitud midagi!" v-if="!store.isKeyWordsChosen" />
+        <RecordsListComponent v-if="store.isKeyWordsChosen" />
+        <div class="controls">
+            <NavButtonComponent :parameters="controls" />
         </div>
-        <ControlsComponent
-            title="TAGASI"
-            functionName="goToHomeView"
-            @goToHomeView="$router.push({ name: 'home' })"
-        />
     </div>
 </template>
 
 <script lang="ts">
-import ControlsComponent from "@/components/ControlsComponent.vue";
+import { defineComponent } from "vue";
+import NavButtonComponent from "@/components/NavButtonComponent.vue";
+import RecordsListComponent from "@/components/RecordsListComponent.vue";
 import MessageComponent from "@/components/MessageComponent.vue";
-import RecordRowComponent from "@/components/RecordRowComponent.vue";
-import { Record } from "@/records/record";
-import { ALL_RECORDS } from "@/records/allRecords";
-import { KeyWord } from "@/records/constants/keyWords";
-import router from "@/router";
+import { useRecordsStore } from "@/stores/records";
 
-export default {
+export default defineComponent({
     components: {
-        ControlsComponent,
+        NavButtonComponent,
+        RecordsListComponent,
         MessageComponent,
-        RecordRowComponent,
     },
 
-    data() {
-        return {
-            chosenKeyWords: [] as string[],
-        };
+    setup() {
+        const store = useRecordsStore();
+        const records = store.getRecordsGropedByKeyWords();
+        const controls = { text: "TAGASI", viewName: "home" };
+        return { records, controls, store };
     },
-
-    created() {
-        // @ts-ignore
-        const keyWords = this.$route.params.recordsKeyWords;
-        if (keyWords === undefined) {
-            router.push({ name: "home" });
-        } else {
-            // @ts-ignore
-            this.chosenKeyWords = keyWords.filter((word: string) => {
-                if (!(Object.values(KeyWord) as string[]).includes(word)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        }
-    },
-
-    methods: {
-        getFilteredRecords() {
-            // @ts-ignore
-            if (this.chosenKeyWords.length === 0) {
-                return [];
-            }
-
-            return ALL_RECORDS.filter((record: Record) => {
-                // @ts-ignore
-                for (const word of this.chosenKeyWords) {
-                    if (
-                        !this.composeKeyWordsCollection(record).includes(word)
-                    ) {
-                        return false;
-                    }
-                }
-
-                return true;
-            });
-        },
-
-        composeKeyWordsCollection(record: Record): string[] {
-            return [record.grade, record.subject, record.month];
-        },
-    },
-};
+})
 </script>

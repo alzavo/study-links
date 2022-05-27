@@ -1,7 +1,7 @@
 <template>
-    <select class="select" :id="enumName">
-        <option value="">{{ enumName }}</option>
-        <option v-for="item in enumKeys" :key="item" :value="item">
+    <select class="select" :id="parameters.name">
+        <option value="">{{ parameters.name }}</option>
+        <option v-for="item in parameters.values" :key="item" :value="item">
             {{ item }}
         </option>
     </select>
@@ -10,8 +10,7 @@
 <script lang="ts">
 export default {
     props: {
-        enumName: String,
-        enumKeys: Object,
+        parameters: Object,
     },
 };
 </script>
