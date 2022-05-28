@@ -7,21 +7,27 @@ import { defineStore } from 'pinia'
 
 export const useSelectOptionsStore = defineStore({
     id: 'selectOptions',
+
     state: () => ({
         keyWords: ALL_KEY_WORDS,
+
         grades: {
             name: KeyWord.Grade,
             values: Object.values(Grade),
         },
+
         subjects: {
             name: KeyWord.Subject,
             values: Object.values(Subject),
         },
+
         months: {
             name: KeyWord.Month,
             values: Object.values(Month),
         },
     }),
+
     getters: {},
+
     actions: {},
 })

@@ -11,47 +11,49 @@ export const useRecordsStore = defineStore({
         keyWords: [] as string[],
     }),
 
-    getters: {
-        isKeyWordsChosen(state): boolean {
-            return state.keyWords.length > 0;
-        }
-    },
+    getters: {},
 
     actions: {
-        getRecordsGropedByKeyWords(): Record[] {
-            if (this.keyWords.length === 0) {
+        setKeyWords(keyWords: string[]) {
+            this.keyWords = removeInitialKeyWords(keyWords);
+        },
+
+        getRecordsByKeyWords(): Record[] {
+            if (isEmpty(this.keyWords)) {
                 return [] as Record[];
             }
 
             return this.records.filter((record: Record) => {
-
                 for (const word of this.keyWords) {
-                    if (!this.composeRecordKeyWords(record).includes(word)) {
+                    if (!includes(composeKeyWords(record), word)) {
                         return false;
                     }
                 }
-
                 return true;
             });
 
         },
-
-        removeInitialKeyWords(keyWords: string[]): string[] {
-            return keyWords.filter((word: string) => {
-                if (!(Object.values(KeyWord) as string[]).includes(word)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        },
-
-        composeRecordKeyWords(record: Record): string[] {
-            return [record.grade, record.subject, record.month];
-        },
-
-        setKeyWords(keyWords: string[]) {
-            this.keyWords = this.removeInitialKeyWords(keyWords);
-        }
     }
 })
+
+function removeInitialKeyWords(keyWords: string[]): string[] {
+    return keyWords.filter((word: string) => {
+        if (!includes(Object.values(KeyWord), word)) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+}
+
+function includes(collection: string[], target: string): boolean {
+    return collection.includes(target);
+}
+
+function isEmpty(collection: string[]): boolean {
+    return collection.length === 0;
+}
+
+function composeKeyWords(record: Record): string[] {
+    return [record.grade, record.subject, record.month];
+}

@@ -16,7 +16,7 @@ export default defineComponent({
 
     setup() {
         const store = useRecordsStore();
-        const records = store.getRecordsGropedByKeyWords();
+        const records = store.getRecordsByKeyWords();
         return { records };
     }
 })

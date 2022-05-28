@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <MessageComponent text="Ei leitud midagi!" v-if="!store.isKeyWordsChosen" />
-        <RecordsListComponent v-if="store.isKeyWordsChosen" />
+        <MessageComponent text="Ei leitud midagi!" v-if="records.length === 0" />
+        <RecordsListComponent v-if="records.length > 0" />
         <div class="controls">
             <NavButtonComponent :parameters="controls" />
         </div>
@@ -24,7 +24,7 @@ export default defineComponent({
 
     setup() {
         const store = useRecordsStore();
-        const records = store.getRecordsGropedByKeyWords();
+        const records = store.getRecordsByKeyWords();
         const controls = { text: "TAGASI", viewName: "home" };
         return { records, controls, store };
     },
